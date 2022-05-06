@@ -14,7 +14,9 @@ const keyboard = {
         switch: null,       
         btn: [],
     },
-    properties:{        
+    properties:{
+        shiftCtrl: false,
+        capslock: false,
         lang: 'en',        
     },
 
@@ -54,9 +56,86 @@ const keyboard = {
         this.elements.main.appendChild(this.elements.keycontent)
         this.elements.main.appendChild(this.elements.switch)
         body.appendChild(this.elements.main);
+      },
+
+     generationLangCapsKey(i) {
+        if (this.properties.shiftCtrl === true || this.properties.capslock === true) {
+          if (this.properties.lang === 'en') {
+              return enCaps[i];
+          }
+          return ruCaps[i];
+        }
+        if (this.properties.lang === 'en') {
+            return en[i];
+        }
+        return ru[i];
+      },
+
+      getCurrentKeyByCode(code) {        
+        let index = 0;
+        for (i = 0; i < eventCode.length; i++) {
+          if (eventCode[i] === code) {
+            index = i;
+            break;
+          }
+        }
+        return this.generationLangCapsKey(index);
+      },
+      onMouseDown(event) {
+        
+        let code = '';        
+        if(event.target.classList.contains('button')){
+            event.target.classList.add('active_btn');
+            code = event.target.dataset.code;
+        }
+        if (code !== '') {
+          switch (code) {
+            case 'Backspace':
+                this.elements.text.innerHTML = this.elements.text.innerHTML.slice(0, -1);
+              break;
+           
+            case 'Tab':
+              this.elements.text.innerHTML = `${this.elements.text.innerHTML}        `;
+              break;
+            case 'Enter':
+              this.elements.text.innerHTML = `${this.elements.text.innerHTML}\n`;
+              break;
+            case 'Space':
+              this.elements.text.innerHTML = `${this.elements.text.innerHTML} `;
+              break;
+           
+            case 'ShiftLeft':
+              this.shiftState = true;
+              this.changeKeyboardLayout();
+              break;
+           
+            default:
+              this.elements.text.innerHTML += this.getCurrentKeyByCode(code);
+          }
+        }
+      },
+      onMouseUp(event) {
+       
+        let code = '';
+      
+        if(event.target.classList.contains('button')){
+            event.target.classList.remove('active_btn');
+            code = event.target.dataset.code;
+        }
+        if (code === 'CapsLock') {
+          this.properties.capslock = !this.properties.capslock;
+          this.changeKeyboardLayout();
+        }
+    
+        if (code === 'ShiftLeft' || code === 'ShiftRight') {
+          this.properties.shiftCtrl = false;
+          this.changeKeyboardLayout();
+        }
       }
     }
-      window.onload = () => {
+    window.onload = () => {
     
-        keyboard.init();
-    }
+        keyboard.init();       
+        document.addEventListener('mousedown', (event) => keyboard.onMouseDown(event));
+        document.addEventListener('mouseup', (event) => keyboard.onMouseUp(event));   
+      };
