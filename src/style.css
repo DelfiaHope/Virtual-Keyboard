@@ -55,7 +55,7 @@
   min-width: 50px;
   min-height: 50px;
   border-radius: 5px;
-  background-color: #585442;
+  background-color: #69644f;
   color: #FFFFFF;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -70,7 +70,33 @@
 }
 
 .active_btn {
-  background-color: #2e2c26;
+  background-color: #3a362a;
+  -webkit-animation: active 0.5s;
+          animation: active 0.5s;
+}
+
+@-webkit-keyframes active {
+  from {
+    background-color: #69644f;
+  }
+  50% {
+    background-color: #070705;
+  }
+  to {
+    background-color: #3a362a;
+  }
+}
+
+@keyframes active {
+  from {
+    background-color: #69644f;
+  }
+  50% {
+    background-color: #070705;
+  }
+  to {
+    background-color: #3a362a;
+  }
 }
 
 .back_caps {

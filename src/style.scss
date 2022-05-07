@@ -42,7 +42,7 @@
    min-width: 50px;
    min-height: 50px;
    border-radius: 5px;
-   background-color: rgb(88, 84, 66);
+   background-color: rgb(105, 100, 79);
    color: #FFFFFF; 
    box-shadow: none;
    font-size: 19px;
@@ -55,9 +55,21 @@
    }
 }
 .active_btn{
-    background-color: rgb(46, 44, 38);
+    background-color: rgb(58, 54, 42);
+    animation: active 0.5s;
    
 }
+@keyframes active {
+    from {        
+        background-color: rgb(105, 100, 79);
+    }   
+    50% {       
+        background-color:  #070705;
+    }   
+    to {        
+        background-color: rgb(58, 54, 42);
+    }
+  }
 .back_caps{
     min-width: 125px;
 }
