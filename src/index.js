@@ -48,6 +48,10 @@ class Keyboard {
     this.main.appendChild(this.keycontent);
     this.main.appendChild(this.switch);
     body.appendChild(this.main);
+    
+  }
+  moveCursor(){
+    this.text.selectionStart = this.text.selectionStart + 1;
   }
 
   chooseLangCapsKey(i) {
@@ -83,14 +87,15 @@ class Keyboard {
     }
   }
 
-  MouseDown(event) {
+  mouseDown(event) {
+   // this.text.selectionStart = this.text.selectionEnd = this.text.value.length
     let code = '';
-
+    
     if (event.target.classList.contains('button')) {
       if (event.target.dataset.code !== 'CapsLock') {
         event.target.classList.add('active_btn');
       }
-      // console.log(event.target.dataset.code)
+      //console.log(event.target.dataset.code)
 
       code = event.target.dataset.code;
     }
@@ -98,32 +103,64 @@ class Keyboard {
     if (code !== '') {
       switch (code) {
         case 'Backspace':
+          let cursorStart = this.text.selectionStart;
+        if (this.text.selectionStart === this.text.innerHTML.length){
           this.text.innerHTML = this.text.innerHTML.slice(0, -1);
+          //this.text.selectionStart = cursorStart;
+        }else{
+          this.text.innerHTML = this.text.innerHTML.substring(0, this.text.selectionStart - 1)
+              + this.text.innerHTML.substring(this.text.selectionStart,
+                this.text.innerHTML.length
+              );            
+        }
+
+        this.text.selectionStart = cursorStart -1;
           break;
 
         case 'Delete':
+           let cursorDelete = this.text.selectionStart;
+            if (this.text.selectionStart !== this.text.innerHTML.length) {
+              this.text.innerHTML = this.text.innerHTML.substring(0, this.text.selectionStart)
+                + this.text.innerHTML.substring(this.text.selectionStart + 1,
+                  this.text.innerHTML.length
+                );
+            } 
+            this.text.selectionStart = cursorDelete;
+          break;
 
-          // if (this.text.innerHTML.startPosition !== this.text.innerHTML.lenght) {
+        case 'ControlLeft':
+           this.text.innerHTML = `${this.text.innerHTML}`;
+         break;
 
-          //   this.text.innerHTML = this.text.innerHTML
-          //     .substring(0, this.text.innerHTML.startPosition)
-          //     + this.text.innerHTML.substring(
-          //       this.text.innerHTML.startPosition + 1,
-          //       this.text.innerHTML.lenght,
-          //     );
-          // }
+        case 'ControlRight':
+           this.text.innerHTML = `${this.text.innerHTML}`;
+         break;
+
+        case 'AltRight':
+           this.text.innerHTML = `${this.text.innerHTML}`;
+          break;
+
+        case 'AltLeft':
+           this.text.innerHTML = `${this.text.innerHTML}`;
+         break;
+        
+        case 'MetaLeft':
+          this.text.innerHTML = `${this.text.innerHTML}`;
           break;
 
         case 'Tab':
           this.text.innerHTML = `${this.text.innerHTML}        `;
+          this.moveCursor()
           break;
 
         case 'Enter':
           this.text.innerHTML = `${this.text.innerHTML}\n`;
+          this.moveCursor()
           break;
 
         case 'Space':
           this.text.innerHTML = `${this.text.innerHTML} `;
+          this.moveCursor()
           break;
 
         case 'ShiftRight':
@@ -146,11 +183,12 @@ class Keyboard {
 
         default:
           this.text.innerHTML += this.getCurrentKeyByCode(code);
+          this.moveCursor()
       }
     }
   }
 
-  MouseUp(event) {
+  mouseUp(event) {
     let code = '';
 
     if (event.target.classList.contains('button')) {
@@ -173,8 +211,14 @@ class Keyboard {
       this.changeinnerHtmlBtn();
     }
   }
+  movecursor(){
+    console.log('this.text.selectionStart')
+    this.text.focus()
+    this.text.selectionStart = this.text.value.length
+  }
 
-  KeyDown(event) {
+  keyDown(event) {
+    //this.text.selectionStart = this.text.selectionEnd = this.text.value.length
     if (event.code !== 'F5' || event.code !== 'F12') event.preventDefault();
 
     const btn = document.querySelector(`[data-code="${event.code}"]`);
@@ -185,31 +229,46 @@ class Keyboard {
 
     switch (event.key) {
       case 'Backspace':
-        this.text.innerHTML = this.text.innerHTML.slice(0, -1);
+        let cursorStart = this.text.selectionStart;
+        if (this.text.selectionStart === this.text.innerHTML.length){
+          this.text.innerHTML = this.text.innerHTML.slice(0, -1);
+          //this.text.selectionStart = cursorStart;
+        }else{
+          this.text.innerHTML = this.text.innerHTML.substring(0, this.text.selectionStart - 1)
+              + this.text.innerHTML.substring(this.text.selectionStart,
+                this.text.innerHTML.length
+              );            
+        }
+
+        this.text.selectionStart = cursorStart -1;
         break;
 
       case 'Delete':
-        // this.text.innerHTML =
-        /* if (this.text.innerHTML.startPosition !== this.text.innerHTML.lenght) {
-              this.text.innerHTML = this.text.innerHTML
-                .substring(0, this.text.innerHTML.startPosition)
-                + this.text.innerHTML.substring(
-                  this.text.innerHTML.startPosition + 1,
-                  this.text.innerHTML.lenght,
-                );
-            } */
+        let cursorDelete = this.text.selectionStart;
+        if (this.text.selectionStart !== this.text.innerHTML.length) {
+          this.text.innerHTML = this.text.innerHTML.substring(0, this.text.selectionStart)
+            + this.text.innerHTML.substring(this.text.selectionStart + 1,
+              this.text.innerHTML.length
+            );
+        } 
+        this.text.selectionStart = cursorDelete;
         break;
+        
 
       case 'Tab':
         this.text.innerHTML = `${this.text.innerHTML}        `;
+        this.moveCursor()
         break;
 
       case 'Enter':
         this.text.innerHTML = `${this.text.innerHTML}\n`;
+        this.moveCursor()
         break;
 
       case ' ':
-        this.text.innerHTML = `${this.text.innerHTML} `;
+        console.log('oooooo')       
+        this.text.innerHTML = `${this.text.innerHTML} `; 
+        this.moveCursor();               
         break;
 
       case 'Shift':
@@ -235,10 +294,11 @@ class Keyboard {
 
       default:
         this.text.innerHTML += this.getCurrentKeyByCode(event.code);
+        this.movecursor()
     }
   }
 
-  KeyUp(event) {
+  keyUp(event) {
     if (event.code !== 'F5') event.preventDefault();
     const btn = document.querySelector(`[data-code="${event.code}"]`);
     // console.log(event.code)
@@ -262,8 +322,8 @@ class Keyboard {
 window.onload = () => {
   const virtual = new Keyboard();
   virtual.init();
-  document.addEventListener('keydown', (event) => virtual.KeyDown(event));
-  document.addEventListener('keyup', (event) => virtual.KeyUp(event));
-  document.addEventListener('mousedown', (event) => virtual.MouseDown(event));
-  document.addEventListener('mouseup', (event) => virtual.MouseUp(event));
+  document.addEventListener('keydown', (event) => virtual.keyDown(event));
+  document.addEventListener('keyup', (event) => virtual.keyUp(event));
+  document.addEventListener('mousedown', (event) => virtual.mouseDown(event));
+  document.addEventListener('mouseup', (event) => virtual.mouseUp(event));
 };
