@@ -217,10 +217,9 @@ class Keyboard {
   }
 
   keyDown(event) {
-    if (event.code !== 'F5' || event.code !== 'F12') {
-      event.preventDefault();
+    if (event.code === 'F5' || event.code === 'F12') {
       return;
-    }
+    }event.preventDefault();
 
     const buttonCode = document.querySelector(`[data-code="${event.code}"]`);
 
@@ -301,10 +300,9 @@ class Keyboard {
   }
 
   keyUp(event) {
-    if (event.code !== 'F5' || event.code !== 'F12') {
-      event.preventDefault();
+    if (event.code === 'F5' || event.code === 'F12') {
       return;
-    }
+    }event.preventDefault();
     const buttonCode = document.querySelector(`[data-code="${event.code}"]`);
     // console.log(buttonCode.classList.contains('button'))
     if (event.code !== 'CapsLock') {
