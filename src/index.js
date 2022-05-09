@@ -216,17 +216,16 @@ class Keyboard {
     }
   }
 
-  movecursor() {
-    this.text.selectionStart = this.text.value.length;
-  }
-
   keyDown(event) {
-    if (event.code !== 'F5' || event.code !== 'F12') event.preventDefault();
+    if (event.code !== 'F5' || event.code !== 'F12') {
+      event.preventDefault();
+      return;
+    }
 
-    const btn = document.querySelector(`[data-code="${event.code}"]`);
+    const buttonCode = document.querySelector(`[data-code="${event.code}"]`);
 
     if (event.code !== 'CapsLock') {
-      btn.classList.add('active_btn');
+      buttonCode.classList.add('active_btn');
     }
     const cursorStart = this.text.selectionStart;
     const cursorDelete = this.text.selectionStart;
@@ -247,13 +246,14 @@ class Keyboard {
         break;
 
       case 'Delete':
-
         if (this.text.selectionStart !== this.text.innerHTML.length) {
           this.text.innerHTML = this.text.innerHTML.substring(0, this.text.selectionStart)
             + this.text.innerHTML.substring(
               this.text.selectionStart + 1,
               this.text.innerHTML.length,
             );
+        } else {
+          this.text.innerHTML = `${this.text.innerHTML}`;
         }
         this.text.selectionStart = cursorDelete;
         break;
@@ -290,22 +290,25 @@ class Keyboard {
         this.text.innerHTML = `${this.text.innerHTML}`;
         this.capslock = !this.capslock;
 
-        btn.classList.toggle('active_btn');
+        buttonCode.classList.toggle('active_btn');
         this.changeinnerHtmlBtn();
         break;
 
       default:
         this.text.innerHTML += this.getCurrentKeyByCode(event.code);
-        this.movecursor();
+        this.moveCursor();
     }
   }
 
   keyUp(event) {
-    if (event.code !== 'F5') event.preventDefault();
-    const btn = document.querySelector(`[data-code="${event.code}"]`);
-
+    if (event.code !== 'F5' || event.code !== 'F12') {
+      event.preventDefault();
+      return;
+    }
+    const buttonCode = document.querySelector(`[data-code="${event.code}"]`);
+    // console.log(buttonCode.classList.contains('button'))
     if (event.code !== 'CapsLock') {
-      btn.classList.remove('active_btn');
+      buttonCode.classList.remove('active_btn');
     }
 
     if (event.shiftKey && event.code === 'AltLeft') {
