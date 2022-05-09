@@ -1,0 +1,133 @@
+@import url(../normalize.css);
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.main {
+  padding: 30px;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #f0e4af;
+}
+
+.text_output {
+  width: 900px;
+  height: 150px;
+  padding: 15px;
+  border-radius: 20px;
+  border: 2px solid #eed771;
+  resize: none;
+  margin-bottom: 50px;
+}
+
+.keyboard {
+  width: 880px;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  gap: 6px;
+  background-color: #bdbcb8;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.button {
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 5px;
+  background-color: #69644f;
+  color: #FFFFFF;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  font-size: 19px;
+  text-align: center;
+  line-height: 50px;
+  padding: 0 10px;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.active_btn {
+  background-color: #3a362a;
+  -webkit-animation: active 0.5s;
+          animation: active 0.5s;
+}
+
+@-webkit-keyframes active {
+  from {
+    font-size: 19px;
+    background-color: #69644f;
+  }
+  30% {
+    font-size: 21px;
+    background-color: #070705;
+  }
+  to {
+    font-size: 23px;
+    background-color: #3a362a;
+  }
+}
+
+@keyframes active {
+  from {
+    font-size: 19px;
+    background-color: #69644f;
+  }
+  30% {
+    font-size: 21px;
+    background-color: #070705;
+  }
+  to {
+    font-size: 23px;
+    background-color: #3a362a;
+  }
+}
+
+.back_caps {
+  min-width: 125px;
+}
+
+.tab_del {
+  min-width: 60px;
+}
+
+.enter_shift {
+  min-width: 110px;
+}
+
+.space {
+  min-width: 390px;
+}
+
+.switch {
+  margin-top: 20px;
+  font-size: 18px;
+  font-family: Georgia, Times, serif;
+}
+
+.capslock {
+  text-transform: uppercase;
+}
+/*# sourceMappingURL=style.css.map */

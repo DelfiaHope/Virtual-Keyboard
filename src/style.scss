@@ -1,0 +1,99 @@
+@import url(../normalize.css);
+
+*{
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+}
+.main{
+    padding: 30px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(240, 228, 175);
+}
+.text_output{
+    width: 900px;
+    height: 150px;
+    padding: 15px;
+    border-radius: 20px;
+    border: 2px solid #eed771;
+    resize: none;
+    margin-bottom: 50px;
+}
+
+.keyboard{
+    width: 880px;
+    height: auto;
+
+    display: flex;
+    flex-wrap: wrap;   
+    justify-content: space-around; 
+    gap: 6px;
+
+    background-color: #bdbcb8;
+    padding: 10px;
+    border-radius: 20px;
+
+}
+.button{
+   min-width: 50px;
+   min-height: 50px;
+   border-radius: 5px;
+   background-color: rgb(105, 100, 79);
+   color: #FFFFFF; 
+   box-shadow: none;
+   font-size: 19px;
+   text-align: center; 
+   line-height: 50px;
+   padding: 0 10px;
+   &:hover{
+      //background-color: rgb(128, 124, 113);
+       cursor: pointer;
+   }
+}
+.active_btn{
+    background-color: rgb(58, 54, 42);    
+    animation: active 0.5s;
+   
+}
+@keyframes active {
+    from {    
+        font-size: 19px;    
+        background-color: rgb(105, 100, 79);
+    }   
+    30% {   
+        font-size: 21px;    
+        background-color:  #070705;
+    }   
+    to {   
+        font-size: 23px;     
+        background-color: rgb(58, 54, 42);
+    }
+  }
+
+.back_caps{
+    min-width: 125px;
+}
+.tab_del{
+    min-width: 60px;
+}
+.enter_shift{
+    min-width: 110px;
+}
+.space{
+    min-width: 390px;
+}
+
+.switch{
+    margin-top: 20px;
+    font-size: 18px;
+    font-family: Georgia, Times, serif;
+}
+.capslock{
+    text-transform: uppercase;
+}
+
+
