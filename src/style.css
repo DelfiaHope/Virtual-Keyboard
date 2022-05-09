@@ -77,24 +77,30 @@
 
 @-webkit-keyframes active {
   from {
+    font-size: 19px;
     background-color: #69644f;
   }
-  50% {
+  30% {
+    font-size: 21px;
     background-color: #070705;
   }
   to {
+    font-size: 23px;
     background-color: #3a362a;
   }
 }
 
 @keyframes active {
   from {
+    font-size: 19px;
     background-color: #69644f;
   }
-  50% {
+  30% {
+    font-size: 21px;
     background-color: #070705;
   }
   to {
+    font-size: 23px;
     background-color: #3a362a;
   }
 }

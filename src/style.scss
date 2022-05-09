@@ -55,21 +55,25 @@
    }
 }
 .active_btn{
-    background-color: rgb(58, 54, 42);
+    background-color: rgb(58, 54, 42);    
     animation: active 0.5s;
    
 }
 @keyframes active {
-    from {        
+    from {    
+        font-size: 19px;    
         background-color: rgb(105, 100, 79);
     }   
-    50% {       
+    30% {   
+        font-size: 21px;    
         background-color:  #070705;
     }   
-    to {        
+    to {   
+        font-size: 23px;     
         background-color: rgb(58, 54, 42);
     }
   }
+
 .back_caps{
     min-width: 125px;
 }
